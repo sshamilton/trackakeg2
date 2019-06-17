@@ -1,0 +1,42 @@
+{% extends 'kegerator/base.html' %}
+{% load static %}
+{% block content %}
+<!--the keg image goes here -->
+
+<canvas id="keg" width="107" height="294" ></canvas>
+	<script type="application/javascript">
+		var c = document.getElementById("keg");
+		var ctx = c.getContext("2d");
+		var img = new Image();
+		img.onload = function () {
+			ctx.drawImage(img, 0,0);
+			ctx.fillStyle = 'rgb(200,160,0)';
+			bottom = 245;
+			kegtop = 45;
+			kegpercent = 30;
+			fillamount = (kegpercent/100)*210;
+			start = 210-fillamount +kegtop;
+			finish = fillamount;
+			ctx.fillRect(8,start,92,finish);
+
+			ctx.save()
+			ctx.beginPath();
+			ctx.scale(1, .55);
+			ctx.arc(54,450, 46, 0, 2* Math.PI);
+			ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+
+			ctx.font = "18px Georgia";
+			ctx.fillStyle = 'rgb(0,0,0)';
+			if (kegpercent < 50) {
+				ctx.fillText("{{pints}} Pints", 30, 130);
+			}
+			else {
+				ctx.fillText("{{pints}} Pints", 30, 200);
+			}
+		}
+		img.src = "{% static "kegerator/keg.jpg" %}";
+	</script>
+
+{% endblock %}
