@@ -1,5 +1,4 @@
 import sys
-sys.path.append('/usr/local/lib/python2.7/')
 from xbee import ZigBee
 import mysql.connector
 import serial
@@ -24,7 +23,7 @@ def getdata(xbee):
         cursor.execute("select * from kegerator_keg order by created_at desc limit 1")
         result = cursor.fetchall()
         for record in result:
-            lastweight = record[0]
+            lastweight = record[1]
             #got the last weight, so comapre and insert into the database if different.
             if abs(lastweight-decimalvalue) > 4:
                 print ("Inserting into db.  Old: %d" % lastweight)

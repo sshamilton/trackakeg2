@@ -3,7 +3,7 @@ from django.db import models
 class Keg(models.Model):
     kegweight = models.IntegerField(default=0)
     created_at = models.DateTimeField()
-    kegempty = 710
+    kegempty = 712
     kegfull = 860
     kegtotal = kegfull-kegempty
     def currentvalue(self):

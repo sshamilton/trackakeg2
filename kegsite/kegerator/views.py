@@ -14,4 +14,11 @@ def index(request):
             'percent': percent,
             }
     return HttpResponse(template.render(context))
-
+def pints(request):
+    template = loader.get_template('kegerator/pints.html')
+    keg = Keg()
+    pints = keg.pints()
+    context = {
+            'pints': pints,
+            }
+    return HttpResponse(template.render(context))
